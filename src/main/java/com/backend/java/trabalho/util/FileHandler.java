@@ -10,7 +10,7 @@ import java.util.List;
 
 public class FileHandler {
 
-    public List<String> readCSV(){
+    public static List<String> readCSV(){
 
         List<String> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("cidades.csv"))) {
@@ -25,7 +25,7 @@ public class FileHandler {
         return list;
     }
 
-    public List<CidadeInfo> splitInfo(List<String> stringList){
+    public static List<CidadeInfo> splitInfo(List<String> stringList){
 
         List<CidadeInfo> list = new ArrayList<>();
 

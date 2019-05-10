@@ -1,17 +1,27 @@
 package com.backend.java.trabalho.model;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.TypeAlias;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Getter
-public class CidadeInfo {
+@NoArgsConstructor
+@Document(collection = "cidades")
+@TypeAlias("cidade")
+public class CidadeInfo{
 
-    private String ibge_id;
-    private String uf;
-    private String name;
+    @Id @NotNull @NotBlank private String ibge_id;
+    @NotNull @NotBlank private String uf;
+    @NotNull @NotBlank private String name;
     private Boolean capital;
-    private Double lon;
-    private Double lat;
-    private Boolean no_accents;
+    @NotNull @NotBlank private Double lon;
+    @NotNull @NotBlank private Double lat;
+    @NotNull @NotBlank private String no_accents;
     private String alternative_names;
     private String microregion;
     private String mesoregion;
@@ -28,14 +38,12 @@ public class CidadeInfo {
 
         this.lon = Double.parseDouble(lon);
         this.lat = Double.parseDouble(lat);
-
-        if(no_accents.equals("true"))
-            this.no_accents = true;
-        else
-            this.no_accents = false;
-
+        this.no_accents = no_accents;
         this.alternative_names = alternative_names;
         this.microregion = microregion;
         this.mesoregion = mesoregion;
     }
+
+
+
 }

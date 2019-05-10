@@ -12,8 +12,5 @@ public class Instantiation implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        FileHandler fileHandler = new FileHandler();
-        fileHandler.splitInfo(fileHandler.readCSV());
-
     }
 }
