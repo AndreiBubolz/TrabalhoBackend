@@ -19,7 +19,7 @@ public class FileHandler {
             while ((line = br.readLine()) != null)
                 list.add(line);
         } catch (IOException e) {
-            e.printStackTrace();
+            return null;
         }
 
         return list;

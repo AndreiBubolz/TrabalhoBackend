@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 @TypeAlias("cidade")
 public class CidadeInfo{
 
-    @Id @NotNull @NotBlank private String ibge_id;
+    @Id @NotNull @NotBlank private String id;
     @NotNull @NotBlank private String uf;
     @NotNull @NotBlank private String name;
     private Boolean capital;
@@ -27,7 +27,7 @@ public class CidadeInfo{
     private String mesoregion;
 
     public CidadeInfo(String ibge_id, String uf, String name, String capital, String lon, String lat, String no_accents, String alternative_names, String microregion, String mesoregion) {
-        this.ibge_id = ibge_id;
+        this.id = ibge_id;
         this.uf = uf;
         this.name = name;
 
@@ -43,7 +43,5 @@ public class CidadeInfo{
         this.microregion = microregion;
         this.mesoregion = mesoregion;
     }
-
-
 
 }

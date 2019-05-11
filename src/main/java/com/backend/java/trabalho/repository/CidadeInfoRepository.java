@@ -13,4 +13,7 @@ public interface CidadeInfoRepository extends MongoRepository<CidadeInfo, String
     @Query("{ capital: { $eq: true } }")
     List<CidadeInfo> findByCapital();
 
+    Long countByUf(String uf);
+
+    List<CidadeInfo> findAllByUf(String uf);
 }
