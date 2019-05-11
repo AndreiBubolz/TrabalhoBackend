@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @Document(collection = "cidades")
 @TypeAlias("cidade")
-public class CidadeInfo{
+public class CityInfo {
 
     @Id @NotNull @NotBlank private String id;
     @NotNull @NotBlank private String uf;
@@ -26,7 +26,7 @@ public class CidadeInfo{
     private String microregion;
     private String mesoregion;
 
-    public CidadeInfo(String ibge_id, String uf, String name, String capital, String lon, String lat, String no_accents, String alternative_names, String microregion, String mesoregion) {
+    public CityInfo(String ibge_id, String uf, String name, String capital, String lon, String lat, String no_accents, String alternative_names, String microregion, String mesoregion) {
         this.id = ibge_id;
         this.uf = uf;
         this.name = name;

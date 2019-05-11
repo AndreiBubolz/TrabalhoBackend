@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 public class Instantiation implements CommandLineRunner {
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args){
 
         FileHandler.loadColumns();
 

@@ -1,6 +1,6 @@
 package com.backend.java.trabalho.util;
 
-import com.backend.java.trabalho.model.CidadeInfo;
+import com.backend.java.trabalho.model.CityInfo;
 import lombok.Getter;
 
 import java.io.BufferedReader;
@@ -31,13 +31,13 @@ public class FileHandler {
         return list;
     }
 
-    public static List<CidadeInfo> splitInfo(List<String> stringList){
+    public static List<CityInfo> splitInfo(List<String> stringList){
 
-        List<CidadeInfo> list = new ArrayList<>();
+        List<CityInfo> list = new ArrayList<>();
 
         stringList.forEach(line -> {
             String[] splittedLine = line.split(",");
-            list.add(new CidadeInfo(splittedLine[0], splittedLine[1],
+            list.add(new CityInfo(splittedLine[0], splittedLine[1],
                                     splittedLine[2],splittedLine[3],
                                     splittedLine[4],splittedLine[5],
                                     splittedLine[6],splittedLine[7],
