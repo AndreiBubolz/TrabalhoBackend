@@ -8,9 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -66,12 +64,41 @@ public class CidadeInfoController {
 
     @PostMapping(value = "/addCity") // Requisito #7
     public ResponseEntity<CidadeInfo> addCity(@RequestBody CidadeInfo cidadeInfo){
-        return ResponseEntity.status(HttpStatus.OK).body(cidadeInfoService.addCity(cidadeInfo));
+        return ResponseEntity.status(HttpStatus.CREATED).body(cidadeInfoService.addCity(cidadeInfo));
     }
 
     @DeleteMapping(value = "/deleteCity/{ibge_id}") // Requisito #8
     public ResponseEntity<CidadeInfo> deleteCity(@PathVariable String ibge_id){
         return ResponseEntity.status(HttpStatus.OK).body(cidadeInfoService.deleteCity(ibge_id));
+    }
+
+    @GetMapping(value = "/findByColumn/{column}/{search}") // Requisito #9
+    public ResponseEntity<List<CidadeInfo>> findByColumn(@PathVariable String column, @PathVariable String search){
+
+        List<CidadeInfo> results = cidadeInfoService.findByColumn(column,search);
+
+        if(results == null)
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        else if(results.isEmpty())
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(results);
+        else
+            return ResponseEntity.status(HttpStatus.OK).body(results);
+
+    }
+
+    @GetMapping(value = "/itemsColumn/{column}") // Requisito #10
+    public ResponseEntity<Integer> getNumItemsByColumn(@PathVariable String column){
+        return ResponseEntity.status(HttpStatus.OK).body(cidadeInfoService.findDistinctByColumn(column).size());
+    }
+
+    @GetMapping(value = "/itemsColumn/{column}/detail") // Requisito #10.1 (extra) List the unique results.
+    public ResponseEntity<List<String>> getItemsByColumn(@PathVariable String column){
+        return ResponseEntity.status(HttpStatus.OK).body(cidadeInfoService.findDistinctByColumn(column));
+    }
+
+    @GetMapping(value = "/registerCount") // Requisito #11
+    public ResponseEntity<Long> getRegisterCount(){
+        return ResponseEntity.status(HttpStatus.OK).body(cidadeInfoService.getRegisterCount());
     }
 
 }
