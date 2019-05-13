@@ -35,13 +35,11 @@ public class CityInfoService {
     public List<CityInfo> persistInfoCities(){
         if(cities == null) return null;
 
-        cityInfoRepository.saveAll(cities);
-
-        return cities;
+        return cityInfoRepository.saveAll(cities);
     }
 
-    public List<CityInfo> findCapitals(){
-        List<CityInfo> capitals = cityInfoRepository.findAllByCapital("true");
+    public List<CityInfo> getCapitals(){
+        List<CityInfo> capitals = cityInfoRepository.findAllByCapital(true);
 
         return capitals.stream()
                 .sorted(Comparator.comparing(CityInfo::getNo_accents))
@@ -116,7 +114,13 @@ public class CityInfoService {
             case 0: return cityInfoRepository.findAllById(search);
             case 1: return cityInfoRepository.findAllByUf(search);
             case 2: return cityInfoRepository.findAllByName(search);
-            case 3: return cityInfoRepository.findAllByCapital(search);
+            case 3:
+                if(search.equals("true"))
+                    return cityInfoRepository.findAllByCapital(true);
+                else if(search.equals("false"))
+                    return cityInfoRepository.findAllByCapital(true);
+                else
+                    return null;
             case 4: return cityInfoRepository.findAllByLon(search);
             case 5: return cityInfoRepository.findAllByLat(search);
             case 6: return cityInfoRepository.findAllByNo_accents(search);

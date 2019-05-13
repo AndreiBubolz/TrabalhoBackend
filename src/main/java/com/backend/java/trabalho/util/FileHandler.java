@@ -16,7 +16,6 @@ public class FileHandler {
     private static List<String> columns;
 
     public static List<String> readCSV(){
-
         List<String> list = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader("cidades.csv"))) {
             String line;
@@ -24,6 +23,7 @@ public class FileHandler {
             columns = Arrays.asList(line.split(","));
             while ((line = br.readLine()) != null)
                 list.add(line);
+
         } catch (IOException e) {
             return null;
         }
@@ -53,5 +53,13 @@ public class FileHandler {
             columns = Arrays.asList(br.readLine().split(","));
         } catch (IOException e){}
 
+    }
+
+    public static long getEntriesCount(){
+        try(BufferedReader br = new BufferedReader(new FileReader("cidades.csv"))){
+            return br.lines().count();
+        }catch (IOException e) {
+            return -1;
+        }
     }
 }

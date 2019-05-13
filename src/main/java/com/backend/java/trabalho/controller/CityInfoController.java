@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping(value = "/v1")
@@ -18,7 +21,7 @@ public class CityInfoController {
     @Autowired
     CityInfoService cityInfoService;
 
-    @GetMapping(value = "/loadCSV") //Requisite #1
+    @GetMapping(value = "/readCSV") //Requisite #1
     public ResponseEntity<List<Void>> readCSVFile(){
         cityInfoService.readCSVFile();
 
@@ -34,7 +37,7 @@ public class CityInfoController {
 
     @GetMapping(value = "/capitals") // Requisite #2
     public ResponseEntity<List<CityInfo>> findCapitals(){
-        return ResponseEntity.status(HttpStatus.OK).body(cityInfoService.findCapitals());
+        return ResponseEntity.status(HttpStatus.OK).body(cityInfoService.getCapitals());
     }
 
     @GetMapping(value = "/citiesCount") // Requisite #3
@@ -58,8 +61,8 @@ public class CityInfoController {
     }
 
     @GetMapping(value = "/findByUF/{uf}") // Requisite #6
-    public ResponseEntity<List<CityInfo>> findCitiesByUF(@PathVariable String uf){
-        return ResponseEntity.status(HttpStatus.OK).body(cityInfoService.findByUF(uf));
+    public ResponseEntity<Optional<List<CityInfo>>> findCitiesByUF(@PathVariable String uf){
+        return ResponseEntity.status(HttpStatus.OK).body(Optional.of(cityInfoService.findByUF(uf)));
     }
 
     @PostMapping(value = "/addCity") // Requisite #7
@@ -77,10 +80,8 @@ public class CityInfoController {
 
         List<CityInfo> results = cityInfoService.findByColumn(column,search);
 
-        if(results == null)
+        if(results == null || results.isEmpty())
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-        else if(results.isEmpty())
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(results);
         else
             return ResponseEntity.status(HttpStatus.OK).body(results);
 

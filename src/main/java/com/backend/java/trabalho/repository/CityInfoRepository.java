@@ -19,7 +19,7 @@ public interface CityInfoRepository extends MongoRepository<CityInfo, String> {
     List<CityInfo> findAllByName(String name);
 
     //@Query("{ capital: { $eq: $regex: ?0 } }")
-    List<CityInfo> findAllByCapital(String capital);
+    List<CityInfo> findAllByCapital(boolean capital);
 
     //@Query("{ lon: { $eq: $regex: ?0 } }")
     List<CityInfo> findAllByLon(String lon);
